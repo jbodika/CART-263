@@ -31,9 +31,9 @@ function setup() {
     /* 3: all elements with the class inner-container */
     /***CODE */
     let containerClassEl = document.querySelectorAll('.inner-container')
-    /***OUTPUT: 
-     * NodeList(8) [div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container]
-     */
+        /***OUTPUT: 
+         * NodeList(8) [div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container]
+         */
     console.log(containerClassEl)
 
 
@@ -41,9 +41,9 @@ function setup() {
     /* 4: the last image element inside the element that has the class img-container */
     /***CODE */
     let lastImg = document.querySelectorAll('.img-container')
-    /***OUTPUT: 
-     * <img class="img-image" src="task-1-images/seventeen.png">
-     */
+        /***OUTPUT: 
+         * <img class="img-image" src="task-1-images/seventeen.png">
+         */
 
     console.log(lastImg[lastImg.length - 1])
 
@@ -68,9 +68,9 @@ function setup() {
     /* 6: the element with id name parent */
     /***CODE */
     let name = document.querySelector("#parent")
-    /***OUTPUT: 
-     * 
-     */
+        /***OUTPUT: 
+         * 
+         */
     console.log(name)
 
     /*************************************** */
@@ -85,6 +85,7 @@ function setup() {
     //declared the pTag variable up above
     let currentDate = new Date();
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'];
+    firstPTag = document.querySelector('p');
     firstPTag.innerHTML = `text changed by Jolene on the following date:${months[currentDate.getMonth()]} ${currentDate.getDay()} ${currentDate.getFullYear()}`
 
     /*************************************** */
@@ -104,16 +105,17 @@ function setup() {
     let firstImg = document.querySelector('img')
 
     firstImg.src = 'task-1-images/seven.png'
-    /*************************************** */
-    /* 4: Select the third paragraph element on the page and 
-    replace the content (within the paragraph) to be an h2 element which contains the text `TEST 123`
-    /***CODE */
+        /*************************************** */
+        /* 4: Select the third paragraph element on the page and 
+        replace the content (within the paragraph) to be an h2 element which contains the text `TEST 123`
+        /***CODE */
+    allPTags = document.querySelectorAll('p');
     let thirdPTag = allPTags[2] // gets the third paragraph element
     thirdPTag.innerHTML = '<h2>TEST 123</h2>'
-    /*************************************** */
-    /* 5: Select the fourth paragraph element on the page and 
-    add to the existing content an h2 element containing the text `TEST 123`
-    /***CODE */
+        /*************************************** */
+        /* 5: Select the fourth paragraph element on the page and 
+        add to the existing content an h2 element containing the text `TEST 123`
+        /***CODE */
     let fourthPTag = allPTags[3] // gets the third paragraph element
     fourthPTag.innerHTML += '<h2>TEST 123</h2>'
 
@@ -218,7 +220,7 @@ function setup() {
 
             let returnedDiv = customNewBoxCreate(newGrid)
             returnedDiv.style.left = `${rows* 45}px`; // i dont understand what calculation is needed here
-           
+
             returnedDiv.style.top = `${cols* 45}px`;
 
             if (rows % 2 === 0) {
