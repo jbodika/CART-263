@@ -86,7 +86,7 @@ function setup() {
     let currentDate = new Date();
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'];
     firstPTag = document.querySelector('p');
-    firstPTag.innerHTML = `text changed by Jolene on the following date:${months[currentDate.getMonth()]} ${currentDate.getDay()} ${currentDate.getFullYear()}`
+    firstPTag.innerHTML = `text changed by Jolene on the following date: ${months[currentDate.getMonth()]} ${currentDate.getDate()} ${currentDate.getFullYear()}`
 
     /*************************************** */
     /* 2: Select all elements in the HTML that have the class name content-container
