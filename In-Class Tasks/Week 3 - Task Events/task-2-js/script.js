@@ -113,7 +113,26 @@ function setup() {
   *  3: Finally access all the current points drawn (hint: they all have the class name `point`)
      and change their current background color to the selected color.
   */
-  let colorButtons = document.querySelectorAll(".color-button");
+     let colorButtons= document.querySelectorAll(".color-button");
+
+  // add event listener to each button
+  for (button of colorButtons) {
+    button.addEventListener("click", changeColor);
+  }
+
+  function changeColor(e) {
+    console.log(e)
+    console.log(this.id)
+
+    // loop through each point and update their color
+    let points = document.querySelectorAll(".point")
+    for (point of points) {
+      point.style.background = this.id
+    }
+
+    // change current preset
+    currentPresets.color = this.id
+  }
 
   /*B:: STROKE BUTTON ********************************************/
   /* TO DO: 
@@ -124,8 +143,50 @@ function setup() {
   *  3: Finally access all the current points drawn (hint: they all have the class name `point`)
      and change their current stroke value to the updated value.
   */
+
   let strokeButton = document.querySelector("#change-stroke-button");
 
+  strokeButton.addEventListener("click", updateStroke)
+
+
+
+  function updateStroke(e) {
+
+
+
+    if (currentPresets.stroke < 10) {
+
+      currentPresets.stroke++
+
+    }
+
+    else {
+
+      currentPresets.stroke = 1
+
+    }
+
+
+
+    this.innerHTML = `<p>${currentPresets.stroke}</p>`
+
+
+
+    let allPoints = document.querySelectorAll(".point")
+
+
+
+    for (let point of allPoints) {
+
+      point.style.width = currentPresets.stroke + "px"
+
+      point.style.height = currentPresets.stroke + "px"
+
+    }
+
+
+
+  }
   /*C:: SHAPE BUTTON ********************************************/
   /* TO DO: 
   *  1: Access the shape and assign an event listener to listen for the click event
@@ -142,14 +203,14 @@ function setup() {
   shapeButton.addEventListener('click', callbackFunc);
 
   function callbackFunc() {
-   let pTag = document.querySelector(`#${this.id} p`);
-   let pointsDrawn = document.querySelectorAll('.point');
+    let pTag = document.querySelector(`#${this.id} p`);
+    let pointsDrawn = document.querySelectorAll('.point');
 
     if (currentPresets.shape == 'circle') {
       pTag.innerHTML = currentPresets.shape
       currentPresets.borderRadius = `${0}px`;
       currentPresets.shape = 'square';
-      
+
     } else if
       (currentPresets.shape == 'square') {
       currentPresets.borderRadius = `${300}px`;
@@ -158,7 +219,7 @@ function setup() {
 
     }
 
-    pointsDrawn.forEach((singlePoint)=>{
+    pointsDrawn.forEach((singlePoint) => {
       singlePoint.style.borderRadius = currentPresets.borderRadius;
     })
 
@@ -178,8 +239,30 @@ function setup() {
   *   FILL IN THE CONDITION IN THE GIVEN EVENT listener for clicking the mouse and add the code to  toggle the drawing mode:
   *   turn drawing off it is on or on if it is off (when the drawing mode is mouse-move)
   */
-  let modeButton = document.querySelector("#change-mode-button");
 
+  // create variable to store the change mode button
+  let modeButton = document.querySelector("#change-mode-button");
+  //using the modeButton and adding the click event to it,clickCallback
+  modeButton.addEventListener("click", clickCallback);
+  //when click happens...
+  function clickCallback(e) {
+    // check if the drawing mode is mouse move
+    if (currentPresets.drawingMode === "mouse-move") {
+      currentPresets.drawingMode = "mouse-click";
+      modeButton.innerHTML = "<p>mouse-click</p>";
+    }
+    else {
+      currentPresets.drawingMode = "mouse-move";
+      modeButton.innerHTML = "<p>mouse-move</p>";
+    }
+  }
+
+  pCanvas.addEventListener("click", canvasClick);
+  function canvasClick(e) {
+    createNewDrawingPoint(e.clientX, e.clientY);
+
+
+  }
   /*E:: OPACITY BUTTON ********************************************/
   /* TO DO: 
   *  1: Access the opacity button and assign an event listener to listen for the click event
@@ -189,8 +272,32 @@ function setup() {
   *  3: Finally access all the current points drawn (hint: they all have the class name `point`)
      and change their current opacity value to the updated value.
   */
+
   let opacityButton = document.querySelector("#change-opacity-button");
 
+  opacityButton.addEventListener("click", callback); // Add eventlistener when clicking on opacity button and call the Callback function
+
+  // Function that is called when the opacity button is clicked
+  function callback() {
+    if (currentPresets.opacity > 0.1) {
+      currentPresets.opacity -= 0.1; // reduce opacity everytime opacity button is clicked
+      console.log(currentPresets.opacity);
+    }
+    else if (currentPresets.opacity <= 0.1) {
+      currentPresets.opacity = 1.0; // Reset the opacity back to 1.0 if it reaches 0.0
+      console.log(currentPresets.opacity);
+    }
+
+    // Update button text to show current opacity value
+    let opacityText = opacityButton.querySelector("p"); // fetch the paragraph in the opacity button text
+    opacityText.textContent = currentPresets.opacity.toFixed(1); // change the paragraph to the current present's value and fixe it to one decimal
+
+    // Change all points opacity
+    let points = document.querySelectorAll(".point"); // look for all the points
+    points.forEach(point => {
+      point.style.opacity = currentPresets.opacity; // set the opacity of all the points to the current opacity
+    });
+  }
   /*F:: ERASE BUTTON ********************************************/
   /* TO DO: 
   *  1: Access the erase button and assign an event listener to listen for the click event
@@ -198,4 +305,22 @@ function setup() {
   *  remove all points (hint: they all have the class name `point`) from the drawing div
   */
 
+  let eraseButton = document.querySelector("#change-erase-button");
+  eraseButton.addEventListener("click", eraserCallBack);
+
+
+
+
+
+  function eraserCallBack(e) {
+
+    let toRemove = document.querySelectorAll(".point");
+    console.log(toRemove);
+
+
+    for (let i = 0; i < toRemove.length; i++) {
+      toRemove[i].remove();
+    }
+
+  }
 } //end setup
