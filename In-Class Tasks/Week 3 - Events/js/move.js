@@ -5,13 +5,25 @@ window.onload = function(){
 let drawBox = document.querySelector("#draw-box-a");
  
 //A: add event listener + callback
-drawBox.addEventListener("mousemove", moveCallBack);
- 
-function moveCallBack(e){
+drawBox.addEventListener("mousemove", moveCallback);
+
+function moveCallback(e){
     console.log("mouse move");
     // B: note these are the same ... 
-    console.log(this);
-    console.log(e.target);
+    let rect = this.getBoundingClientRect();
+    console.log(rect);
+    //DIFFERENCE TO ENSURE COORDS ARE RELATIVE
+    let offsetX = e.clientX-rect.x; // allows you to get the coordinates of the black div
+    let offsetY = e.clientY-rect.y;
+   drawBox.innerHTML= `<p> offset_x: ${offsetX}, offset_y:${offsetY} </p>`;
+ 
+
+    let newDiv = document.createElement('div');
+    newDiv.classList.add("point");
+    newDiv.style.left = `${offsetX}px`
+    newDiv.style.top = `${offsetY}px`
+    this.appendChild(newDiv)
+
 }
 
 }
