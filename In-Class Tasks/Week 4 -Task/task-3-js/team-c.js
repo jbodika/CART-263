@@ -90,8 +90,118 @@ function setup_C() {
    * **/
 
   function aniA(parentCanvas) {
-    console.log("in A");
-  }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 375;
+    canvas.height = 375;
+    parentCanvas.appendChild(canvas);
+    
+    const ctx = canvas.getContext("2d");
+    
+    
+    let circles = [];
+    let running = false;
+    let frameCount = 0;
+    let mouseX = canvas.width/2;
+    let mouseY = canvas.height/2;
+    
+    
+    canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+    });
+    
+    canvas.style.cursor = 'none';
+    
+    
+    function draw() {
+    if (!running) return;
+    
+    
+    ctx.fillStyle = 'rgba(0, 0, 50, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.ellipse(mouseX, mouseY, 80, 80, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    
+    if (frameCount % 60 === 0) {
+    circles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: 120,
+    color: `hsl(${Math.random()*360}, 70%, 60%)`,
+    shrinking: false
+    });
+    }
+    
+    
+    circles = circles.filter(circle => {
+    
+    const dx = mouseX - circle.x;
+    const dy = mouseY - circle.y;
+    const distance = Math.sqrt(dx*dx + dy*dy);
+    
+    
+    if (distance < 190) {
+    circle.shrinking = true;
+    
+    circle.x += dx * 0.11;
+    circle.y += dy * 0.11;
+    circle.size -= 3;
+    }
+    
+    
+    ctx.fillStyle = circle.color;
+    ctx.beginPath();
+    ctx.ellipse(circle.x, circle.y, circle.size/2, circle.size/2, 0, 0, Math.PI*2);
+    ctx.fill();
+    
+    return circle.size > 0;
+    });
+    
+    frameCount++;
+    requestAnimationFrame(draw);
+    }
+    
+    const button = document.createElement("button");
+    button.textContent = "▶ Start Animation";
+    button.style.cssText = `
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: #f60f8e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    `;
+    parentCanvas.appendChild(button);
+    
+    
+    button.addEventListener("click", () => {
+    running = !running;
+    button.textContent = running ? "⏹ Stop Animation" : "▶ Start Animation";
+    
+    if (running) {
+    circles = [];
+    frameCount = 0;
+    requestAnimationFrame(draw);
+    }
+    });
+    
+    
+    ctx.fillStyle = 'rgba(0, 0, 50)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    
   /**************** ANI B ************************************ */
   /** PUT ALL YOUR CODE FOR ANIMATION B INSIDE  HERE */
   /**************** ANI B ************************************ */
@@ -126,7 +236,7 @@ function setup_C() {
       for (let i = 0; i < 12; i++) {
         for (let j = 0; j < 12; j++) {
           let square = document.createElement("div");
-          square.classList.add("TEAM_B_square");
+          square.classList.add("TEAM_C_square");
           square.style.width = `${20}px`
           square.style.height = `${20}px`
           //  changes the opcity of the hovered element
