@@ -95,113 +95,103 @@ function setup_C() {
     canvas.width = 375;
     canvas.height = 375;
     parentCanvas.appendChild(canvas);
-    
+
     const ctx = canvas.getContext("2d");
-    
-    
+
+
     let circles = [];
     let running = false;
     let frameCount = 0;
-    let mouseX = canvas.width/2;
-    let mouseY = canvas.height/2;
-    
-    
+    let mouseX = canvas.width / 2;
+    let mouseY = canvas.height / 2;
+
+
     canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
     });
-    
+
     canvas.style.cursor = 'none';
-    
-    
+
+
     function draw() {
-    if (!running) return;
-    
-    
-    ctx.fillStyle = 'rgba(0, 0, 50, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.ellipse(mouseX, mouseY, 80, 80, 0, 0, Math.PI * 2);
-    ctx.fill();
-    
-    
-    if (frameCount % 60 === 0) {
-    circles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: 120,
-    color: `hsl(${Math.random()*360}, 70%, 60%)`,
-    shrinking: false
-    });
+      if (!running) return;
+
+
+      ctx.fillStyle = 'rgba(0, 0, 50, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.ellipse(mouseX, mouseY, 80, 80, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+
+      if (frameCount % 60 === 0) {
+        circles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: 120,
+          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+          shrinking: false
+        });
+      }
+
+
+      circles = circles.filter(circle => {
+
+        const dx = mouseX - circle.x;
+        const dy = mouseY - circle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+
+        if (distance < 190) {
+          circle.shrinking = true;
+
+          circle.x += dx * 0.11;
+          circle.y += dy * 0.11;
+          circle.size -= 3;
+        }
+
+
+        ctx.fillStyle = circle.color;
+        ctx.beginPath();
+        ctx.ellipse(circle.x, circle.y, circle.size / 2, circle.size / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        return circle.size > 0;
+      });
+
+      frameCount++;
+      requestAnimationFrame(draw);
     }
-    
-    
-    circles = circles.filter(circle => {
-    
-    const dx = mouseX - circle.x;
-    const dy = mouseY - circle.y;
-    const distance = Math.sqrt(dx*dx + dy*dy);
-    
-    
-    if (distance < 190) {
-    circle.shrinking = true;
-    
-    circle.x += dx * 0.11;
-    circle.y += dy * 0.11;
-    circle.size -= 3;
-    }
-    
-    
-    ctx.fillStyle = circle.color;
-    ctx.beginPath();
-    ctx.ellipse(circle.x, circle.y, circle.size/2, circle.size/2, 0, 0, Math.PI*2);
-    ctx.fill();
-    
-    return circle.size > 0;
-    });
-    
-    frameCount++;
-    requestAnimationFrame(draw);
-    }
-    
+
     const button = document.createElement("button");
     button.textContent = "▶ Start Animation";
-    button.style.cssText = `
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 16px;
-    background: #f60f8e;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    `;
+    button.classList.add("TEAM_C_animation-button");
     parentCanvas.appendChild(button);
-    
-    
+
+
     button.addEventListener("click", () => {
-    running = !running;
-    button.textContent = running ? "⏹ Stop Animation" : "▶ Start Animation";
-    
-    if (running) {
-    circles = [];
-    frameCount = 0;
-    requestAnimationFrame(draw);
-    }
+      running = !running;
+      button.textContent = running ? "⏹ Stop Animation" : "▶ Start Animation";
+
+      if (running) {
+        circles = [];
+        frameCount = 0;
+        requestAnimationFrame(draw);
+      }
     });
-    
-    
+
+
     ctx.fillStyle = 'rgba(0, 0, 50)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-    
-    
+  }
+
+
+
   /**************** ANI B ************************************ */
   /** PUT ALL YOUR CODE FOR ANIMATION B INSIDE  HERE */
   /**************** ANI B ************************************ */
@@ -221,7 +211,7 @@ function setup_C() {
    * Do not change any code above or the HTML markup.
    * **/
   function aniB(parentCanvas) {
-    let num = 2;
+    let counter = 0;
     let squares = []
     let shades = [
       "#FC6C85",
@@ -230,19 +220,23 @@ function setup_C() {
     ];
     function drawSquares() {
       //offset
-      let offset = 50;
+      let offset = 80;
 
       //make a grid of squares - STATIC
-      for (let i = 0; i < 12; i++) {
-        for (let j = 0; j < 12; j++) {
-          let square = document.createElement("div");
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          let square = document.createElement("div");// creates a single square
           square.classList.add("TEAM_C_square");
-          square.style.width = `${20}px`
-          square.style.height = `${20}px`
-          //  changes the opcity of the hovered element
+
+          //  decreases the opcity of the hovered element
           square.addEventListener('mouseover', () => {
             square.style.opacity = 0.5;
-          })
+          });
+          //  resets the opcity of the previously hovered element
+          square.addEventListener('mouseout', () => {
+            square.style.opacity = 1;
+          });
+
           // deletes the selected square element
           square.addEventListener('click', () => {
             square.remove();
@@ -250,30 +244,25 @@ function setup_C() {
 
           square.style.left = `${offset + i * 25}px`;
           square.style.top = `${offset + j * 25}px`;
+
           parentCanvas.appendChild(square);
           squares.push(square);
         }
       }
     };
 
-
+    /*Function that switches the colours of the elements */  
     function alternateColours() {
+      let columns = 9;
 
-      for (let i = 0; i < squares.length; i += 1) {
-        if (i % num == 0) {
-          squares[i].style.background = shades[0];
-        }
-        else if (i % num === 1) {
-          squares[i].style.background = shades[1];
-        }
-         else if (i % num === 2) {
-          squares[i].style.background = shades[2];
-        }
-      }
-       num++;
+      squares.forEach((square, i) => {
+        let colorIndex = (Math.floor(i / columns) + counter) % shades.length;
+        square.style.background = shades[colorIndex];
+      });
 
-      if (num == 5) {
-        num = 0;
+      counter++;
+      if (counter >= shades.length) {
+        counter = 0;
       }
     }
 
@@ -282,60 +271,70 @@ function setup_C() {
 
 
     window.addEventListener("keydown", function (event) {
-       if (event.code === 'ArrowRight') {
-        // changes the size of every other row
-        for (let i = 0; i < squares.length; i += 2) {
-          squares[i].style.height = Math.ceil(Math.random() * 50) + 'px';
-        }
+
+      if (event.code === 'ArrowRight') {// randomizes the width of the squares through 1-50px
+        squares.forEach((square) => {
+          square.style.width = Math.ceil(Math.random() * 50) + 'px';
+        });
+      } else if (event.code === 'ArrowLeft') {// resets the width of the squares to 20px
+        squares.forEach((square) => {
+          square.style.width = `${20}px`;
+        })
+      } else if (event.code === 'ArrowUp') {// randomizes the height of the squares through 1-50px
+        squares.forEach((square) => {
+          square.style.height = Math.ceil(Math.random() * 50) + 'px';
+        })
+      } else if (event.code === 'ArrowDown') {// resets the height of the squares to 20px
+        squares.forEach((square) => {
+          square.style.height = `${20}px`;
+        })
       }
     });
-
-    console.log("in B");
-  }
-
-  /**************** ANI C ************************************ */
-  /** PUT ALL YOUR CODE FOR INTERACTIVE PATTERN C INSIDE  HERE */
-  /**************** ANI C ************************************ */
-  /**************** TASK *******************************************
-    * YOU CAN USE ALL NOTES --- and see my examples in team-h.js for inspiration and possibly help:)
-    * 1: use the PROVIDED keyup/down callbacks `windowKeyDownRef` and/or `windowKeyUpnRef` to handle keyboard events
-    * 2: create an interactive pattern/sketch based on keyboard input. Anything goes.
-    * do not use  requestAnimationFrame(), setInterval() nor setTimeout() -> meaning keep it simple ;)
-    * 
-    * NOTE::: PLEASE::: if you add any custom css PLEASE use the style.css and prefix any class names with your team label
-    * i.e. you want to create a custom div class and you are in "Team_A" then call your class TEAM_A_ANI_A_Div -
-    * this is so that your styles are not overriden by other teams.
-    * NOTE::: All your code is to be added here inside this function -
-    * remember you can define other functions inside....
-    * Do not change any code above or the HTML markup.
-    * **/
-
-
-  function aniC(parentCanvas) {
-
-    console.log("in C");
-    /*** THIS IS THE CALLBACK FOR KEY DOWN ( DO NOT CHANGE THE NAME..) */
-    windowKeyDownRef = function (e) {
-      //code for key down in here
-      console.log(e)
-      //SAMPLE KEY CHECK (you do not have to use)
-      if (e.code === "Space") {
-        console.log("team-space down")
-      }
-    };
-
-    /*** THIS IS THE CALLBACK FOR KEY UP ( DO NOT CHANGE THE NAME..) */
-    windowKeyUpRef = function (e) {
-      //SAMPLE KEY CHECK (you do not have to use)
-      if (e.code === "Space") {
-        console.log("space up");
-        console.log("team-space up")
-      }
-
-    };
-
-    //DO NOT REMOVE
-    window.addEventListener("keydown", windowKeyDownRef);
-    window.addEventListener("keyup", windowKeyUpRef);
   }
 }
+/**************** ANI C ************************************ */
+/** PUT ALL YOUR CODE FOR INTERACTIVE PATTERN C INSIDE  HERE */
+/**************** ANI C ************************************ */
+/**************** TASK *******************************************
+  * YOU CAN USE ALL NOTES --- and see my examples in team-h.js for inspiration and possibly help:)
+  * 1: use the PROVIDED keyup/down callbacks `windowKeyDownRef` and/or `windowKeyUpnRef` to handle keyboard events
+  * 2: create an interactive pattern/sketch based on keyboard input. Anything goes.
+  * do not use  requestAnimationFrame(), setInterval() nor setTimeout() -> meaning keep it simple ;)
+  * 
+  * NOTE::: PLEASE::: if you add any custom css PLEASE use the style.css and prefix any class names with your team label
+  * i.e. you want to create a custom div class and you are in "Team_A" then call your class TEAM_A_ANI_A_Div -
+  * this is so that your styles are not overriden by other teams.
+  * NOTE::: All your code is to be added here inside this function -
+  * remember you can define other functions inside....
+  * Do not change any code above or the HTML markup.
+  * **/
+
+
+function aniC(parentCanvas) {
+
+  console.log("in C");
+  /*** THIS IS THE CALLBACK FOR KEY DOWN ( DO NOT CHANGE THE NAME..) */
+  windowKeyDownRef = function (e) {
+    //code for key down in here
+    console.log(e)
+    //SAMPLE KEY CHECK (you do not have to use)
+    if (e.code === "Space") {
+      console.log("team-space down")
+    }
+  };
+
+  /*** THIS IS THE CALLBACK FOR KEY UP ( DO NOT CHANGE THE NAME..) */
+  windowKeyUpRef = function (e) {
+    //SAMPLE KEY CHECK (you do not have to use)
+    if (e.code === "Space") {
+      console.log("space up");
+      console.log("team-space up")
+    }
+
+  };
+
+  //DO NOT REMOVE
+  window.addEventListener("keydown", windowKeyDownRef);
+  window.addEventListener("keyup", windowKeyUpRef);
+}
+
