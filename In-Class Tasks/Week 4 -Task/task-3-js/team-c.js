@@ -274,7 +274,7 @@ function setup_C() {
 
       if (event.code === 'ArrowRight') {// randomizes the width of the squares through 1-50px
         squares.forEach((square) => {
-          square.style.width = Math.ceil(Math.random() * 50) + 'px';
+          square.style.width = `${Math.ceil(Math.random() * 50)}px`;
         });
       } else if (event.code === 'ArrowLeft') {// resets the width of the squares to 20px
         squares.forEach((square) => {
@@ -282,7 +282,7 @@ function setup_C() {
         })
       } else if (event.code === 'ArrowUp') {// randomizes the height of the squares through 1-50px
         squares.forEach((square) => {
-          square.style.height = Math.ceil(Math.random() * 50) + 'px';
+          square.style.height = `${Math.ceil(Math.random() * 50)}px`;
         })
       } else if (event.code === 'ArrowDown') {// resets the height of the squares to 20px
         squares.forEach((square) => {
