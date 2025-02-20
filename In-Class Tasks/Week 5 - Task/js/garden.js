@@ -103,7 +103,7 @@ let garden = {
 */
 
 /** TEAM C -- BUSH
- * 1/ Create a  file to hold a  Bush Class (i.e. Bush.js)
+ * 1/ Create a  file to hold a  Bush Class (i.e. Bush.js)----
  * 2/ Create the Bush Class : a constructor which takes a position, size and color as parameters
  * 3/ Create a renderBush() method -> which essentially creates a HTML element(s) - could be
  * an image element :) or an svg .... representing a Bush... (see Sun or Flower for inspiration)
@@ -112,6 +112,13 @@ let garden = {
  * 6/ Ensure that new bushes can be added to the garden
  * 
 */
+
+let bush = new Bush(50,50,25,"green")
+bush.renderBush()
+
+document.querySelector(".grass")[0].appendChild("../assets/images/bush.svg", 'svg')
+  
+
 
 /** TEAM D -- WEEDS
  * 1/ Create a  file to hold a  Weed Class (i.e. Weed.js)
