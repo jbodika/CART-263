@@ -1,120 +1,105 @@
-window.onload = function (){
-// Our garden
-let garden = {
-    // An array to store the individual flowers
-    flowers: [],
-    bushes: [],
+window.onload = function() {
+    // Our garden
+    let garden = {
+        // An array to store the individual flowers
+        flowers: [],
+        bushes: [],
 
-    // How many flowers in the garden
-    numFlowers: 20,
-    /*grass object */
-    grass: {
-      // The color of the grass (background)
-      grassColor: {
-        r: 120,
-        g: 180,
-        b: 120,
-      },
-      //the grass element
-      grassDiv: document.createElement("div"),
-    },
- 
-    /*sky object */
-    sky: {
-      // The color of the sky (background)
-      skyColor: {
-        r: 83,
-        g: 154,
-        b: 240,
-      },
-      //the sky element
-      skyDiv: document.createElement("div"),
-    },
-  };
-  // new  sun instancce
-  let sun =  new Sun(10,10,{r: 240, g: 206,b: 83})
+        // How many flowers in the garden
+        numFlowers: 20,
+        /*grass object */
+        grass: {
+            // The color of the grass (background)
+            grassColor: {
+                r: 120,
+                g: 180,
+                b: 120,
+            },
+            //the grass element
+            grassDiv: document.createElement("div"),
+        },
 
-  function createAndRenderTheGarden() {
-    /* note how we use dot notation....*/
-    //sky
-    garden.sky.skyDiv.classList.add("sky");
-    garden.sky.skyDiv.style.background = `rgb(${garden.sky.skyColor.r},${garden.sky.skyColor.g},${garden.sky.skyColor.b})`;
-    document.getElementsByTagName("main")[0].appendChild(garden.sky.skyDiv);
-    //sun
-    sun.renderSun();
+        /*sky object */
+        sky: {
+            // The color of the sky (background)
+            skyColor: {
+                r: 83,
+                g: 154,
+                b: 240,
+            },
+            //the sky element
+            skyDiv: document.createElement("div"),
+        },
+    };
+    // new  sun instancce
+    let sun = new Sun(10, 10, { r: 240, g: 206, b: 83 })
 
-    //grass
-    garden.grass.grassDiv.classList.add("grass");
-    garden.grass.grassDiv.style.background = `rgb(${garden.grass.grassColor.r},${garden.grass.grassColor.g},${garden.grass.grassColor.b})`;
-    document.getElementsByTagName("main")[0].appendChild(garden.grass.grassDiv);
+    function createAndRenderTheGarden() {
+        /* note how we use dot notation....*/
+        //sky
+        garden.sky.skyDiv.classList.add("sky");
+        garden.sky.skyDiv.style.background = `rgb(${garden.sky.skyColor.r},${garden.sky.skyColor.g},${garden.sky.skyColor.b})`;
+        document.getElementsByTagName("main")[0].appendChild(garden.sky.skyDiv);
+        //sun
+        sun.renderSun();
 
-
-    // bush
-
-    //let xPos = document.querySelector('x')
-   // let yPos = document.querySelector('y')
-    
+        //grass
+        garden.grass.grassDiv.classList.add("grass");
+        garden.grass.grassDiv.style.background = `rgb(${garden.grass.grassColor.r},${garden.grass.grassColor.g},${garden.grass.grassColor.b})`;
+        document.getElementsByTagName("main")[0].appendChild(garden.grass.grassDiv);
 
 
-    garden.grass.grassDiv.addEventListener('click',()=>{
+        // bush
+        garden.grass.grassDiv.addEventListener('click', (event) => {
+            let grassBounds = garden.grass.grassDiv.getBoundingClientRect()
 
-      let x = garden.grass.grassDiv.getBoundingClientRect()
-     // let x = event.pageX 
-      let y = event.pageY
-      let size = 200
-      let colour="green"
-  
-    
-      let bush = new Bush(x,y,size,colour);
-      console.log(x)
-      console.log(y)
+            // get mouse position in the grass div
+            let x = event.clientX - grassBounds.left;
+            let y = event.clientY - grassBounds.top;
 
-    garden.bushes.push(bush);
-  
-    bush.renderBush()
-    console.log(bush)
-   
-    })
+            let size = 150;
 
-    // garden.bushes.forEach(bush=>{
-    //   bush.renderBush()
-    // })
- 
+            let bush = new Bush(x, y, size);
+
+            garden.bushes.push(bush); // adds bushes to bush array
+
+            bush.renderBush();
+        })
 
 
-    //create some flowers
-    for (let i = 0; i < garden.numFlowers; i++) {
-        // Create variables for our arguments for clarity
-        let x = Math.random() * (window.innerWidth);
-        let y = Math.random() * 120;
-        let size = Math.random() * 30 + 10;
-        let stemLength = Math.random() * 50 + 20;
-        let petalColor = {
-          r: parseInt(Math.random() * 155) + 100,
-          g: parseInt(Math.random() * 155) + 100,
-          b: parseInt(Math.random() * 155) + 100,
-        };
-  
-        // Create a new flower using the arguments
-        let flower = new Flower(x, y, size, stemLength, petalColor);
-        // Add the flower to the array of flowers
-        garden.flowers.push(flower);
-      }
+        //create some flowers
+        for (let i = 0; i < garden.numFlowers; i++) {
+            // Create variables for our arguments for clarity
+            let x = Math.random() * (window.innerWidth);
+            let y = Math.random() * 120;
+            let size = Math.random() * 30 + 10;
+            let stemLength = Math.random() * 50 + 20;
+            let petalColor = {
+                r: parseInt(Math.random() * 155) + 100,
+                g: parseInt(Math.random() * 155) + 100,
+                b: parseInt(Math.random() * 155) + 100,
+            };
 
-      for (let i = 0; i < garden.numFlowers; i++) {
-        // Add the flower to the array of flowers
-        garden.flowers[i].renderFlower();
-      }
-  }
-  createAndRenderTheGarden();
-  window.addEventListener("keydown", function handleKeyDown(event) {
-  //call the handleKeyDown method of class
-  sun.handleKeyDownInSUn(event);
-});
+            // Create a new flower using the arguments
+            let flower = new Flower(x, y, size, stemLength, petalColor);
+            // Add the flower to the array of flowers
+            garden.flowers.push(flower);
+        }
+
+        for (let i = 0; i < garden.numFlowers; i++) {
+            // Add the flower to the array of flowers
+            garden.flowers[i].renderFlower();
+        }
+    }
+    createAndRenderTheGarden();
+    window.addEventListener("keydown", function handleKeyDown(event) {
+        //call the handleKeyDown method of class
+        sun.handleKeyDownInSUn(event);
+    });
+
 
 }
 
-  
 
 /**TEAM A -- BEES
  * 1/ Create a  file to hold a  Bee Class (i.e. Bee.js)
@@ -125,7 +110,7 @@ let garden = {
  * 5/ In garden.js add 5 new Bees to the garden (in an array) - 
  * all different sizes and colors and in different positions and then call the animateBee() method on all the Bees
  * 
-*/
+ */
 
 /**TEAM B -- SQUIRRELS
  * 1/ Create a  file to hold a  Squirrel Class (i.e. Squirrel.js)
@@ -136,7 +121,7 @@ let garden = {
  * 5/ In garden.js add 5 new Squirrels to the garden (in an array) - 
  * all different sizes and colors and in different positions and then call the animateSquirrel() method on all the Squirrels
  * 
-*/
+ */
 
 /** TEAM C -- BUSH
  * 1/ Create a  file to hold a  Bush Class (i.e. Bush.js)----
@@ -147,7 +132,7 @@ let garden = {
  * 5/ In garden.js add initially one new bush (in an array) - 
  * 6/ Ensure that new bushes can be added to the garden
  * 
-*/
+ */
 
 
 
@@ -161,7 +146,7 @@ let garden = {
  * 5/ In garden.js add initially  a couple of weeds (in an array) - 
  * 6/ Ensure that new weeds can be added to the garden.
  * 
-*/
+ */
 
 
 /** TEAM E -- ADD A DIFFERENT FLOWER CLASS
@@ -172,7 +157,7 @@ let garden = {
  * 4/ Add a mouse click event listener to each FlowerE  - such that when you click on it  - it switches color ... (everytime you click it should change color)
  * 5 / In garden.js add 25 new FlowerE objects to the garden (in an array) - different colors (make them quite small) -
  * 
-*/
+ */
 
 /** TEAM F -- Birds
  * 1/ Create a  file to hold a  Bird Class (i.e. Bird.js)
@@ -184,5 +169,4 @@ let garden = {
  * 6/ In garden.js add an empty array for the birds
  * 
  * 
-*/
-
+ */
