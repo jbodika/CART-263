@@ -3,6 +3,8 @@ window.onload = function (){
 let garden = {
     // An array to store the individual flowers
     flowers: [],
+    bushes: [],
+
     // How many flowers in the garden
     numFlowers: 20,
     /*grass object */
@@ -45,6 +47,40 @@ let garden = {
     garden.grass.grassDiv.classList.add("grass");
     garden.grass.grassDiv.style.background = `rgb(${garden.grass.grassColor.r},${garden.grass.grassColor.g},${garden.grass.grassColor.b})`;
     document.getElementsByTagName("main")[0].appendChild(garden.grass.grassDiv);
+
+
+    // bush
+
+    //let xPos = document.querySelector('x')
+   // let yPos = document.querySelector('y')
+    
+
+
+    garden.grass.grassDiv.addEventListener('click',()=>{
+
+      let x = garden.grass.grassDiv.getBoundingClientRect()
+     // let x = event.pageX 
+      let y = event.pageY
+      let size = 200
+      let colour="green"
+  
+    
+      let bush = new Bush(x,y,size,colour);
+      console.log(x)
+      console.log(y)
+
+    garden.bushes.push(bush);
+  
+    bush.renderBush()
+    console.log(bush)
+   
+    })
+
+    // garden.bushes.forEach(bush=>{
+    //   bush.renderBush()
+    // })
+ 
+
 
     //create some flowers
     for (let i = 0; i < garden.numFlowers; i++) {
@@ -113,11 +149,7 @@ let garden = {
  * 
 */
 
-let bush = new Bush(50,50,25,"green")
-bush.renderBush()
 
-document.querySelector(".grass")[0].appendChild("../assets/images/bush.svg", 'svg')
-  
 
 
 /** TEAM D -- WEEDS

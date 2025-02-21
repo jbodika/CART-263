@@ -4,16 +4,25 @@ class Bush{
         this.y=y;
         this.size=size;
         this.color=color; 
-        this.bushImg = "https://img.freepik.com/free-vector/bush-garden-plant_24908-80964.jpg?t=st=1740084820~exp=1740088420~hmac=d958909852a220527a6ea1c830d1e76d8852a30bc37ff1326170b6068940e402&w=1380"
+        this.bushImg = "../assets/images/bush.svg";
+        this.bush
+
     }
 
     renderBush(){
+       
+    this.bush = document.createElement('img');
+   this.bush.setAttribute('src', this.bushImg)
+   this.bush.style.width = this.size +'px'
+   this.bush.style.height = this.size +'px'
 
-    this.bushDiv = document.createElementNS(this.bushImg,'svg');
-    console.log(this.bushDiv)
+//    this.bush.style.top=this.y;
+//    this.bush.style.width=this.size;
+//    this.bush.style.height=this.size;
+    document.querySelector(".grass").appendChild(this.bush)
 
-   // this.bushDiv.append(this.bushImg)
-   // let svg = document.createElement('');
+   console.log(this.bush.style.left)
+
 
     }
 }
