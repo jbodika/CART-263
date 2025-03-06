@@ -74,7 +74,7 @@ function animationLoop(){
  */
 
 
-/** TASK 2:(Drawing Board B) - 
+/** TASK 2:(Drawing Board B) - NOT REQUIRED
  *  1: Affect the rectangle by input from the microphone somehow, in real time...
  *  at least two properties of the rectangle need to update and change...
  *  2: apply some arbitrary animation to the rectangle obj (change the properties in the update method provided)
@@ -82,7 +82,7 @@ function animationLoop(){
  *  
  */
 
-/** TASK 3:(Drawing Board C) - 
+/** TASK 3:(Drawing Board C) - NOT REQUIRED
  *  1: Affect the free-style shape by input from the microphone somehow, in real time...
  *  at least two properties of the free-style shape need to update and change...
  *  2: apply some arbitrary animation to the free-style shape (change the properties in the update method provided)
