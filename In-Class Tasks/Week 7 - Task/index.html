@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <h1> CART 263:ALL STUFF INSIDE CANVAS(ES) </h1>
+    <h1> CART 263: ALL STUFF INSIDE CANVAS(ES) </h1>
     <video id="video-birds" src="videos/b1_s.mov" autoplay="autoplay" hidden></video>
     <main>
         <div class="container">
@@ -40,31 +40,28 @@
 
         <div class="container">
             <div class="button-g">
-
+                <!-- Filter Controls -->
                 <span id="filter_button_blur">
-                    <span> blur</span>
-                    <input id="blurnum" type="number" min="0" max="8" />
+                    <span> Blur: </span>
+                    <input id="blurnum" type="number" min="0" max="8" value="0" />
                 </span>
 
-                <!-- button-->
-                <span id="filter_button_sepia">
-                    <span> sepia</span>
-                    <input id="sepianum" type="number" min="0" max="0" />
+                <span id="filter_button_brightness">
+                    <span> Brightness: </span>
+                    <input id="brightnessnum" type="number" min="0" max="200" value="100" />
                 </span>
 
-                 <!-- button 2-->
-                 <span id="filter_button_hue">
-                    <span> hue-rotate</span>
-                    <input id="huenum" type="number" min="0" max="360" />
+                <span id="filter_button_contrast">
+                    <span> Contrast: </span>
+                    <input id="contrastnum" type="number" min="0" max="200" value="100" />
                 </span>
 
-                 <!-- button 2-->
-                 <span id="filter_button_invert">
-                    <span> invert</span>
-                    <input id="invertnum" type="number" min="0" max="0" />
+                <span id="filter_button_grayscale">
+                    <span> Grayscale: </span>
+                    <input id="grayscalenum" type="number" min="0" max="100" value="0" />
                 </span>
-
             </div>
+            
             <canvas class="canvases" width=400 height=300 id="partD"></canvas>
         </div>
 
