@@ -30,9 +30,15 @@ class CircularObj {
     this.context.stroke();
   }
 
+  
+  overCircle(mouseX, mouseY) {
+    let x = mouseX - this.x;
+    let y = mouseY - this.y;
+    return x * x + y * y <= this.radius * this.radius;
+  }
+
+
   update() {
-    //update circle
-    //this.x += 1;
-    //console.log("circle update");
+    this.y -= 1;
   }
 }
