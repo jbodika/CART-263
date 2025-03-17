@@ -21,4 +21,6 @@ window.onload = function () {
           { id: "5004", type: "Maple" },
         ],
       };
+
+
 }
