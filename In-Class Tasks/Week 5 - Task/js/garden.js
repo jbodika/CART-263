@@ -56,7 +56,6 @@ window.onload = function() {
             // get mouse position in the grass div
             let x = event.clientX - grassBounds.left;
             let y = event.clientY - grassBounds.top;
-
             let size = 150;
 
             let bush = new Bush(x, y, size);
