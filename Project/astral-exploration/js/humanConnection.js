@@ -24,7 +24,7 @@ window.onload = function() {
         if (letterCount < sentence.length) {
             document.querySelector('.writeText').append(sentence.charAt(letterCount));
             letterCount++;
-            setTimeout(() => typeWriter(sentence), 50);
+            setTimeout(() => typeWriter(sentence), 25);
         } else {
             // jump to the next sentence
             setTimeout(() => {

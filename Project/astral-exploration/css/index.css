@@ -47,9 +47,11 @@ div img {
     color: white;
     font-weight: bold;
     border-radius: 0.2em;
+    
     padding: 5px;
-    border: solid;
+    border: solid #a2e363;
     font-size: 20px;
+    position: relative;
 }
 
 .miniGame {
@@ -71,13 +73,18 @@ div img {
     margin: 15px;
     padding: 15px;
     background-color: lightblue;
-    border: 1px solid;
+
+    border: none;
     border-radius: 2em;
 }
 
+#result{
+    color:#a2e363;
+    font-weight: bold;
+}
 video {
     width: 640px;
-    height: 500px;
+    height: 300px;
     filter: hue-rotate(90deg);
 }
 
