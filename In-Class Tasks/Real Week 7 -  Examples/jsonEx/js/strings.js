@@ -96,4 +96,7 @@ for(let i =0; i< splitText.length; i++) {
     container_3.innerHTML += `<p> Element <span style = "color:crimson"> ${i}</span>: 
      ${splitText[i]}</p>`;
 }
+
+
+
 };
