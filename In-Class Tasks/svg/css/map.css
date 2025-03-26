@@ -1,0 +1,30 @@
+body{
+    background-color: black;
+    color: aliceblue;
+}
+
+.appartment{
+    fill: rgb(0, 123, 154);
+    stroke: #fff;   
+}
+
+.appartment:hover{
+    fill: rgb(1, 40, 93);   
+}
+
+.furniture{
+    fill: hsla(48, 100%, 43%, 0.539);
+    stroke-width: 0;
+}
+.furniture:hover{
+    fill: hsl(48, 100%, 43%);
+    stroke-width: 0;
+}
+
+.visible{
+    fill: #fff;
+}
+
+.invisible{
+    fill: none;
+}
