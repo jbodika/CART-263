@@ -18,10 +18,12 @@ This project currently uses
 
 - [BootStrap Library](https://getbootstrap.com/)
 - [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
+- [TypewriterJS v2 API](https://www.npmjs.com/package/typewriter-effect)
 
 ## Attribution
 
 - FaceAPI setup code taken from [Web Dev Simplified](https://www.youtube.com/watch?v=CVClHLwv-4I&t=637s) youtube video.
+
 
 ### Images
 
