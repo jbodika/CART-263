@@ -14,7 +14,25 @@ Will you crack the code of humanity, or will your alien friend remain forever lo
 
 ## Credits
 
-This project currently uses
+### Animal APIs Used:
+Random Dog API: For random dog images and information. Visit Random Dog API
+Random Cat API: For random cat images and information. Visit Random Cat API
+Random Fox API: For random fox images. Visit Random Fox API
+
+### Alien Glyph Inspiration:
+Unicode Symbols & Sci-fi Visual Language: Alien glyphs are inspired by Unicode symbols and various sci-fi visual languages.
+
+### Voice Synth:
+Web Speech API: For text-to-speech and speech recognition functionalities.
+
+### Emojis:
+Emojis used in this project are part of the Unicode character set.
+
+Tamagotchi characters are owned by Bandai Co., Ltd. All rights reserved. Artwork used in this project is from [Google Images].
+
+W3Schools: A great resource for web development tutorials and reference materials. Visit W3Schools
+p5.js: The p5.js library was used for creative coding and visualizations. Visit p5.js
+Claude AI: Special thanks to Claude AI for assisting with debugging and providing code suggestions.
 
 - [BootStrap Library](https://getbootstrap.com/)
 - [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
