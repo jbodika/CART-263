@@ -22,6 +22,8 @@ Random Fox API: For random fox images. Visit Random Fox API
 ### Alien Glyph Inspiration:
 Unicode Symbols & Sci-fi Visual Language: Alien glyphs are inspired by Unicode symbols and various sci-fi visual languages.
 
+### Emotions Images
+
 ### Voice Synth:
 Web Speech API: For text-to-speech and speech recognition functionalities.
 
@@ -38,6 +40,8 @@ Claude AI: Special thanks to Claude AI for assisting with debugging and providin
 - [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
 - [TypewriterJS v2 API](https://www.npmjs.com/package/typewriter-effect)
 - [Speech Recognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
+- [Conffeti API](https://github.com/catdad/canvas-confetti)
+- [Google Fonts API](https://fonts.google.com/specimen/Poppins)
 
 ## Attribution
 
