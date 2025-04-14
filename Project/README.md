@@ -36,8 +36,8 @@ Tamagotchi characters are owned by Bandai Co., Ltd. All rights reserved. Artwork
 
 - W3Schools: A great resource for web development tutorials and reference materials. Visit [W3Schools
 p5.js](https://www.w3schools.com/)
-The p5.js library was used for creative coding and visualizations. Visit [p5.js](https://p5js.org/)
-Claude AI: Special thanks to Claude AI for assisting with debugging and providing code suggestions.
+- The p5.js library was used for creative coding and visualizations. Visit [p5.js](https://p5js.org/)
+- Claude AI: Special thanks to Claude AI for assisting with debugging and providing code suggestions.
 
 - [BootStrap Library](https://getbootstrap.com/)
 - [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
