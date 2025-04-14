@@ -13,6 +13,18 @@ You must help a fellow alien navigate this bizarre world by collecting clues, de
 Will you crack the code of humanity, or will your alien friend remain forever lost on Earth?
 
 ## Credits
+- W3Schools: A great resource for web development tutorials and reference materials. Visit [W3Schools
+p5.js](https://www.w3schools.com/)
+- The p5.js library was used for creative coding and visualizations. Visit [p5.js](https://p5js.org/)
+- Claude AI: Special thanks to Claude AI for assisting with debugging and providing code suggestions.
+
+- [BootStrap Library](https://getbootstrap.com/)
+- [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
+- [TypewriterJS v2 API](https://www.npmjs.com/package/typewriter-effect)
+- [Speech Recognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
+- [Conffeti API](https://github.com/catdad/canvas-confetti)
+- [Google Fonts API](https://fonts.google.com/specimen/Poppins)
+
 
 ### Animal APIs Used:
 - Random Dog API: For random dog images and information. Visit Random Dog API
@@ -34,17 +46,6 @@ Emojis used in this project are part of the Unicode character set.
 
 Tamagotchi characters are owned by Bandai Co., Ltd. All rights reserved. Artwork used in this project is from [Google Images].
 
-- W3Schools: A great resource for web development tutorials and reference materials. Visit [W3Schools
-p5.js](https://www.w3schools.com/)
-- The p5.js library was used for creative coding and visualizations. Visit [p5.js](https://p5js.org/)
-- Claude AI: Special thanks to Claude AI for assisting with debugging and providing code suggestions.
-
-- [BootStrap Library](https://getbootstrap.com/)
-- [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
-- [TypewriterJS v2 API](https://www.npmjs.com/package/typewriter-effect)
-- [Speech Recognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
-- [Conffeti API](https://github.com/catdad/canvas-confetti)
-- [Google Fonts API](https://fonts.google.com/specimen/Poppins)
 
 ## Attribution
 
