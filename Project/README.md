@@ -19,6 +19,7 @@ This project currently uses
 - [BootStrap Library](https://getbootstrap.com/)
 - [FaceAPI.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
 - [TypewriterJS v2 API](https://www.npmjs.com/package/typewriter-effect)
+- [Speech Recognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
 
 ## Attribution
 
