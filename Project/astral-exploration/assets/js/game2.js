@@ -6,12 +6,9 @@ let drawnPoints = [];
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 
-let attemptCount = 0;
-const MAX_ATTEMPTS = 3;
-const BASE_TOLERANCE = 10;
 let currentLetterIndex = 0;
 
-// 🅰️ Define your alphabet drawings (abstracted points, simplified!)
+// 🅰️ Define your alphabet drawings
 const letters = [
   [ { x: 10, y: 10 }, { x: 20, y: 40 }, { x: 30, y: 10 } ], // A
   [ { x: 10, y: 10 }, { x: 10, y: 40 }, { x: 30, y: 25 } ], // B
@@ -20,19 +17,16 @@ const letters = [
   [ { x: 30, y: 10 }, { x: 10, y: 10 }, { x: 10, y: 40 }, { x: 30, y: 40 } ] // E
 ];
 
-// 👁 Labels to show on screen (you can use Japanese, Roman, etc.)
 const letterLabels = ['あ', 'い', 'う', 'え', 'お'];
-
-// Set first character on load
 document.getElementById('targetLetter').textContent = letterLabels[currentLetterIndex];
 
-// Mouse Events
+// 🖱 Mouse Events
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', endDraw);
 canvas.addEventListener('mouseleave', endDraw);
 
-// Touch Events
+// 📱 Touch Events
 canvas.addEventListener('touchstart', startTouch, { passive: false });
 canvas.addEventListener('touchmove', drawTouch, { passive: false });
 canvas.addEventListener('touchend', endDraw);
@@ -40,16 +34,16 @@ canvas.addEventListener('touchend', endDraw);
 function startDraw(e) {
   drawing = true;
   ctx.beginPath();
-  let x = e.offsetX * (canvas.width / canvas.offsetWidth);
-  let y = e.offsetY * (canvas.height / canvas.offsetHeight);
+  let x = e.offsetX;
+  let y = e.offsetY;
   ctx.moveTo(x, y);
   drawnPoints = [{ x, y }];
 }
 
 function draw(e) {
   if (!drawing) return;
-  let x = e.offsetX * (canvas.width / canvas.offsetWidth);
-  let y = e.offsetY * (canvas.height / canvas.offsetHeight);
+  let x = e.offsetX;
+  let y = e.offsetY;
   ctx.lineTo(x, y);
   ctx.strokeStyle = "#000";
   ctx.lineWidth = 4;
@@ -65,8 +59,8 @@ function endDraw() {
 function getTouchPos(canvas, touchEvent) {
   const rect = canvas.getBoundingClientRect();
   return {
-    x: (touchEvent.touches[0].clientX - rect.left) * (canvas.width / canvas.offsetWidth),
-    y: (touchEvent.touches[0].clientY - rect.top) * (canvas.height / canvas.offsetHeight)
+    x: touchEvent.touches[0].clientX - rect.left,
+    y: touchEvent.touches[0].clientY - rect.top
   };
 }
 
@@ -76,7 +70,7 @@ function startTouch(e) {
   drawing = true;
   ctx.beginPath();
   ctx.moveTo(pos.x, pos.y);
-  drawnPoints = [{ x: pos.x, y: pos.y }];
+  drawnPoints = [pos];
 }
 
 function drawTouch(e) {
@@ -91,7 +85,7 @@ function drawTouch(e) {
   drawnPoints.push(pos);
 }
 
-// Buttons
+// 🔘 Buttons
 document.getElementById('clearBtn')?.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawnPoints = [];
@@ -102,69 +96,47 @@ document.getElementById('submitBtn')?.addEventListener('click', () => {
 });
 
 document.getElementById('skipBtn')?.addEventListener('click', () => {
-  alert("⏭️ Skipped to the next letter.");
-  attemptCount = 0;
+  showPopup("⏭️ Skipped to the next letter.");
   goToNextLetter();
 });
 
-// 🎯 Check current letter
+// ✅ Super Forgiving Check
 function checkDrawing() {
-  const targetLetter = letters[currentLetterIndex];
-  const userPathLength = drawnPoints.length;
-  const targetPathLength = targetLetter.length;
-  const lengthRatio = userPathLength / targetPathLength;
-
-  const BASE_TOLERANCE = 10;
-  let tolerance = BASE_TOLERANCE;
-
-  // ✨ Boost tolerance on FIRST attempt of levels 2 and 3 (index 1 and 2)
-  if ((currentLetterIndex === 1 || currentLetterIndex === 2) && attemptCount === 0) {
-    tolerance += 10; // make the first try easier
-  }
-
-  if (lengthRatio < 0.8) tolerance += 5;
-  else if (lengthRatio > 1.2) tolerance -= 3;
-
-  tolerance += attemptCount * 5;
-
-  let totalDistance = 0;
-  for (let i = 0; i < Math.min(userPathLength, targetPathLength); i++) {
-    const dx = drawnPoints[i].x - targetLetter[i].x;
-    const dy = drawnPoints[i].y - targetLetter[i].y;
-    totalDistance += Math.sqrt(dx * dx + dy * dy);
-  }
-
-  const avgDistance = totalDistance / Math.min(userPathLength, targetPathLength);
-  attemptCount++;
-
-  if (avgDistance < tolerance) {
-    alert(`✅ Correct! Moving to next letter.`);
-    attemptCount = 0;
-    goToNextLetter();
-  } else if (attemptCount >= MAX_ATTEMPTS) {
-    alert(`💡 Out of attempts. Moving to next letter.`);
-    attemptCount = 0;
-    goToNextLetter();
-  } else {
-    alert(`❌ Not quite. Try again!`);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawnPoints = [];
-  }
+  const phrases = [
+    "✅ Nice drawing! Let's keep going!",
+    "🎉 Looks good to me!",
+    "👏 On to the next one!",
+    "✅ Good enough!",
+    "🔥 You're doing great!"
+  ];
+  const randomMessage = phrases[Math.floor(Math.random() * phrases.length)];
+  showPopup(randomMessage);
+  goToNextLetter();
 }
 
-
-// ⏩ Load next letter or finish game
 function goToNextLetter() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawnPoints = [];
-
   currentLetterIndex++;
+
   if (currentLetterIndex >= letters.length) {
-    alert("🎉 You finished the game! Great work!");
-    window.location.href = "map.html"; // ✅ Redirects to map.html after clicking OK
+    showPopup("🎉 You finished the game! Redirecting...");
+    setTimeout(() => {
+      window.location.href = "map.html";
+    }, 2000);
     return;
   }
 
-  // ✅ Update displayed character
   document.getElementById('targetLetter').textContent = letterLabels[currentLetterIndex];
+}
+
+// 📣 Display popup
+function showPopup(message) {
+  const popup = document.getElementById('popupMessage');
+  popup.textContent = message;
+  popup.classList.remove('hidden');
+
+  setTimeout(() => {
+    popup.classList.add('hidden');
+  }, 2500);
 }
